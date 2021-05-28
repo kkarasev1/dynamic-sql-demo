@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div th:fragment="suggestion(name,header)">
+    <div class="list_head">
+      <div class="suggest_header">[(${header})]:</div>
+      <div class="fl_l suggest" th:each="suggestion: ${suggestions}" th:if="${suggestion.name==name}">
+           <input type="checkbox" th:attr="name=${name},value=${suggestion.value},checked=${searchForm.contains(suggestion.name, suggestion.value)}"/>
+            [(${suggestion.readable})] [(${suggestion.count})]
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+  </div>
+</body>
+</html>

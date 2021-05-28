@@ -1,0 +1,15 @@
+SELECT
+  [# th:each="field,iterator: ${fields}"]
+    [(${field.expression})] AS [(${field.name})]
+    [# th:unless="${iterator.last}"],[/]
+  [/]
+  [# th:insert="joinsAndFilters"] [/]
+  [# th:if="${pageable.sort.sorted}"]
+    ORDER BY
+    [# th:each="order,iterator: ${pageable.sort}"]
+         [# th:unless="${iterator.first}"],[/]
+         [(${order.property})] [(${order.direction})]
+    [/]
+  [/]
+  LIMIT [(${pageable.pageSize})]
+  OFFSET [(${pageable.offset})]

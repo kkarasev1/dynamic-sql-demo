@@ -1,0 +1,15 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dynamic_demo
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+  flyway:
+    locations: |
+      classpath:db/migration/common,classpath:db/migration/test-data
+    out-of-order: true

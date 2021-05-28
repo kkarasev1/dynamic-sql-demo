@@ -1,0 +1,1 @@
+package ru.integritysolutions.kkarasev.dynamicsql.mapping;public enum FilterTypeEnum {  EQUAL,  TSV,  BOOLEAN,  MIN}

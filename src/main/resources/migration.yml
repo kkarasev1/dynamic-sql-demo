@@ -1,0 +1,6 @@
+version:
+  1.1:
+    common:
+      V1_1_Create_tables.sql
+    test-data:
+      V1_2_Fill_test_data

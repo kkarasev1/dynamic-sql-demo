@@ -1,0 +1,84 @@
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" type="text/css" href="style/style.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="scripts/script.js"></script>
+    <title>Демонстрация динамического SQL</title>
+  </head>
+  <body>
+    <h1>Демонстрация динамического SQL</h1>
+    <form action="/" method="get" id="mainForm">
+      <div style="display:none;" th:each="order: ${page.sort}">
+        <input type="hidden" name="sort" th:attr="value=${order.property + ',' + order.direction}"/>
+      </div>
+      <div style="display:none;" th:if="${page.sort.unsorted}">
+        <input type="hidden" name="sort" />
+      </div>
+      <div th:include="includes :: suggestion('region','Регионы')"></div>
+      <div th:include="includes :: suggestion('city','Города')"></div>
+
+
+      <div  class="list_head">
+        <div class="list_head_block fl_l">Найти:<input type="text" name="search" th:attr="value=${searchForm.search}"/> </div>
+        <div class="list_head_block fl_l">
+          <input type="checkbox" th:attr="checked=${searchForm.fridayBorn}" name="fridayBorn"/>Родившиеся в пятницу
+        </div>
+        <div class="list_head_block fl_l">Возраст от:
+          <input name="minAge" type="number" th:attr="value=${searchForm.minAge}" style="width:40px;"/>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
+       <div class="list_head">
+        <div class="list_head_block fl_l">Всего записей:
+          <div th:text="${page.totalElements}" class="fl_r"></div>
+        </div>
+        <div class="list_head_block fl_l">Записей на странице:
+          <input name="size" type="number" th:attr="value=${page.size}" style="width:40px;"/>
+        </div>
+        <div  class="list_head_block fl_l">
+          <input type="submit" value="Вывести"/>
+        </div>
+        <div class="list_head_block fl_r">
+          <a href="#" id="prevPageLink" th:if="${pageable.pageNumber &gt; 0}">
+            &lt;&lt;
+          </a>
+          Страница [[${pageable.pageNumber + 1}]] из [[${page.totalPages}]]
+          <a href="#" id="nextPageLink" th:if="${pageable.pageNumber +1 &lt; page.totalPages}">
+            &gt;&gt;
+          </a>
+          <input type="hidden" name="page" th:attr="value=${pageable.pageNumber}"  />
+
+        </div>
+      </div>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2" class="name_col sort_col" id="col-surname">Фамилия</th>
+          <th rowspan="2" class="name_col sort_col" id="col-name">Имя</th>
+          <th rowspan="2" class="name_col sort_col" id="col-middle_name">Отчество</th>
+          <th rowspan="2" class="date_col sort_col"  id="col-birth_date">Дата рождения</th>
+          <th colspan="2">Место жительства</th>
+          <th colspan="2">Образование</th>
+        </tr>
+        <tr>
+          <th width="100px" class="sort_col"  id="col-city">Город</th>
+          <th class="sort_col" id="col-region">Регион</th>
+          <th class="sort_col" id="col-university">Университет</th>
+          <th class="date_col sort_col" id="col-graduate_date">Дата окончания</th>
+        </tr>
+      </thead>
+      <tr th:each="person: ${page.content}">
+        <td th:text="${person.surname}"></td>
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.middleName}"></td>
+        <td th:text="${#dates.format(person.birthDate, 'dd.MM.yyyy')}"></td>
+        <td th:text="${person.city}"></td>
+        <td class="small" th:text="${person.region}"></td>
+        <td class="small" th:text="${person.university}"></td>
+        <td th:text="${#dates.format(person.graduateDate, 'dd.MM.yyyy')}"></td>
+
+      </tr>
+    </table>
+  </body>
+</html>

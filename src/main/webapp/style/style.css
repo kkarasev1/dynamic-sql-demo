@@ -1,0 +1,71 @@
+body {
+  font-family: sans-serif;
+}
+h1 {
+  text-align: center;
+  font-family: monospace;
+}
+.list_head {
+  width: 100%;
+}
+.list_head_block {
+  width: 220px;
+  margin-left: 20px;
+}
+table {
+  width: 100%;
+}
+thead tr {
+  height: 50px;
+}
+tr {
+  height: 30px;
+}
+th {
+  border: 1px solid black;
+}
+th.name_col {
+  width: 120px;
+}
+th.date_col {
+  width: 80px;
+}
+th.sort_col {
+ background-color: #DDDDFF;
+ cursor: s-resize;
+}
+th.sort_col.up {
+ background-color: #FFDDDD;
+}
+th.sort_col.down {
+ background-color: #DDFFDD;
+ cursor: n-resize;
+}
+td {
+  font-size: 14px;
+  vertical-align: top;
+}
+.small {
+   font-size: 12px;
+ }
+.fl_l {
+  float: left;
+}
+.fl_r {
+  float: right;
+}
+input[type='submit'] {
+  font-size: 20px;
+  font-weigth: bold;
+}
+.suggest_header {
+   float: left;
+   margin-right: 9px;
+}
+.suggest {
+   font-size: 12px;
+   margin-right: 5px;
+}
+.suggest input{
+   margin-right: 0px;
+}
